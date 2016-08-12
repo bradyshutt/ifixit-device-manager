@@ -4,12 +4,44 @@
 
 <title>iFixit Device Manager</title> 
 
+<link rel="stylesheet" href="/styles/.less.style.css" type="text/css">
+<link rel="stylesheet" href="/styles/.less.templates.css" type="text/css">
 </head> 
 <body> 
-  
 
 
+  <img class='main-logo' src="/images/logos/Logo_horizontal_color.svg" alt="ifixit">
+
+  <h1>Search for a Device</h1>
+
+  <input type="text" id="search-query" placeholder="iPhone 4S">
+  <input type="button" id="search-submit" value="Search">
+
+  <div class="results-wrapper">
+    <p id="results-meta"></p>
+    <ul id="results"> 
+
+    </ul>
+  </div>
+
+
+  <!-- 
+  <div class="my-devices-panel-wrapper">
+    <div class="my-devices-panel-toggle">
+      My Devices
+      
+        
+    </div>
+
+      
+  </div>
+ -->
 
 
 </body> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+
+<script src="/js/main.js"></script>
+
 </html>

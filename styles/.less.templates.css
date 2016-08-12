@@ -1,0 +1,17 @@
+.device {
+  width: 300px;
+  background-color: #ccc;
+  height: 100px;
+  font-size: 30px;
+  border: solid #000 2px;
+  font-family: helvetica;
+}
+.device p {
+  padding-left: 5px;
+}
+.device img {
+  border: solid #000 2px;
+  float: right;
+  height: 72px;
+  margin: 13px;
+}

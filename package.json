@@ -1,0 +1,19 @@
+{
+  "name": "ifixit",
+  "version": "1.0.0",
+  "description": "Build a tool to let users assemble a collection of devices they own.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradyshutt/ifixit-device-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradyshutt/ifixit-device-manager/issues"
+  },
+  "homepage": "https://github.com/bradyshutt/ifixit-device-manager#readme"
+}
