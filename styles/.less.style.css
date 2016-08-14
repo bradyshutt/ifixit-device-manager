@@ -3,12 +3,82 @@
   padding: 0;
   font-family: helvetica;
 }
-.main-logo {
-  position: absolute;
-  right: 0;
+.logo-wrapper {
+  display: absolute;
   top: 0;
-  margin-top: -70px;
+  left: 0;
+  background-color: #1F2124;
+  height: 200px;
+  width: 100%;
 }
-.results-wrapper #results-meta {
+.logo-wrapper .main-logo {
+  display: block;
+  margin: -70px auto;
+}
+.content-wrapper {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+#results-meta {
   color: #999;
+}
+.devices > li {
+  background-color: yellow;
+  display: block;
+  width: 200px;
+  height: 18px;
+  margin: 2px 5px;
+  padding: 5px;
+  cursor: move;
+  border: 1px solid black;
+  list-style-type: none;
+  color: #0171BB;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+}
+.my-devices-wrapper {
+  position: fixed;
+  background-color: red;
+  bottom: 0px;
+  right: 0;
+}
+.my-devices-wrapper .my-devices-toggle {
+  background-color: #1F2124;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  color: white;
+}
+.my-devices-wrapper #my-devices {
+  border: black solid 2px;
+  background-color: green;
+  min-height: 20px;
+  height: 200px;
+}
+.my-devices-wrapper #my-devices li {
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
 }
