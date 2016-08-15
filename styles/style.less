@@ -55,25 +55,11 @@
 #results-meta {
   color: #999;
 }
-//
-//.devices > li {
-//  background-color: yellow;
-//  display: block;
-//  width: 200px;
-//  height: 18px;
-//  margin: 2px 5px;
-//  padding: 5px;
-//  cursor: move;
-//  border: 1px solid black;
-//  list-style-type: none;
-//  color: @ifixit-blue;
-//  .noselect;
-//}
-
 
 .my-devices-wrapper {
   position: fixed;
-  background-color: red;
+  background-color: #ddd;
+  width: 250px;
   bottom: 0px;
   right: 0;
 
@@ -86,33 +72,30 @@
     color: white;
   }
 
-  #my-devices {
-    border: black solid 2px;
-    background-color: green;
-    height: 200px;
-    width: 200px;
+  table {
+    border: black solid 1px;
+    min-height: 80px;
+    width: 100%;
+    border-collapse: collapse;
 
-    table {
-      tr {
-        height: 20px;
+    tr {
+      box-sizing: border-box;
+      display: block;
+      height: 30px;
+      border: black solid 1px;
 
-        td {
-
-        background-color: pink;
-
-        }
-
-      }
-      &:first-child {
-        padding-left: 20px;
-        height: 20px;
+      td {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 10px;
       }
 
-      &:last-child {
-        float: right;
-        margin-right: 20px;
-        height: 20px;
+      .remove a {
+        color: red;
+        text-decoration: none;
+        font-weight: 900;
       }
+     
     }
   }
 }

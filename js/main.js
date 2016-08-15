@@ -1,11 +1,23 @@
 'use strict'
 ;(function($) {
 
-  let savedDevices = []
+  /*
+    'Samsung Galaxy S6',
+    'Asus Laptop',
+    'Moto360',
+    'Google Chromebook',
+    'Samsung Galaxy Note 10.1',
+    'Projector'
+  ]
+  */
 
   $(function pageReady() {
-    $('#search-submit').click(submitSearch).click()
+    $('#search-submit').click(submitSearch)//.click()
     $('#search-query').focus()
+
+    myDevices.loadDevices()
+    myDevices.registerView('#my-devices')
+    myDevices.updateViews()
   })
 
   function submitSearch() {
@@ -19,7 +31,6 @@
     })
   }
 
-
   function searchAPI(query) {
     return new Promise((resolve, reject) => { 
       let url 
@@ -29,12 +40,11 @@
       let urrl = 
         'https://www.ifixit.com/api/2.0/wikis/CATEGORY?display=hierarchy'
       let p = jQuery.getJSON(urrl)
-      p.done((data) => { console.log(data) })
+      //p.done((data) => { console.log(data) })
 
       jQuery.getJSON(url, resolve)
     })
   }
-
 
   getTemplate.memos = { }
   function getTemplate(name) {
@@ -51,23 +61,6 @@
       }
     })
   }
-
-  function loadDevices() {
-    console.log('Loading saved devices from local storage')
-  }
-
-  function saveDevices() {
-    console.log('Saving devices o local storage')
-  }
-
-  function addDevice(device) {
-    console.log('Adding', device, 'to saved devices')
-  }
-
-  function removeDevice(device) {
-    console.log('Removing', device, 'from saved devices')
-  }
-
 
 })(jQuery)
 

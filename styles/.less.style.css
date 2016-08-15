@@ -46,7 +46,8 @@
 }
 .my-devices-wrapper {
   position: fixed;
-  background-color: red;
+  background-color: #ddd;
+  width: 250px;
   bottom: 0px;
   right: 0;
 }
@@ -58,26 +59,27 @@
   font-size: 20px;
   color: white;
 }
-.my-devices-wrapper #my-devices {
-  border: black solid 2px;
-  background-color: green;
-  height: 200px;
-  width: 200px;
+.my-devices-wrapper table {
+  border: black solid 1px;
+  min-height: 80px;
+  width: 100%;
+  border-collapse: collapse;
 }
-.my-devices-wrapper #my-devices table tr {
-  height: 20px;
+.my-devices-wrapper table tr {
+  box-sizing: border-box;
+  display: block;
+  height: 30px;
+  border: black solid 1px;
 }
-.my-devices-wrapper #my-devices table tr td {
-  background-color: pink;
+.my-devices-wrapper table tr td {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
 }
-.my-devices-wrapper #my-devices table:first-child {
-  padding-left: 20px;
-  height: 20px;
-}
-.my-devices-wrapper #my-devices table:last-child {
-  float: right;
-  margin-right: 20px;
-  height: 20px;
+.my-devices-wrapper table tr .remove a {
+  color: red;
+  text-decoration: none;
+  font-weight: 900;
 }
 .noselect {
   -webkit-touch-callout: none;
