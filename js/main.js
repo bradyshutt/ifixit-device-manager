@@ -1,42 +1,11 @@
 'use strict'
-;(function() {
+;(function($) {
+
+  let savedDevices = []
 
   $(function pageReady() {
     $('#search-submit').click(submitSearch).click()
     $('#search-query').focus()
-
-    $('#my-devices').sortable({
-      items: 'li',
-      scroll: false,
-      over: (e, ui) => {
-        console.log('over')
-        console.log('origin:', ui.item.data('origin'))
-
-        let self = $('#my-devices')
-        if (ui.sender !== e.target) {
-          self.innerHeight(self.innerHeight() + ui.item.outerHeight()) 
-        }
-      },
-      out: (e, ui) => {
-        console.log('out')
-        $('#my-devices').innerHeight(
-          $('#my-devices').innerHeight() - ui.item.outerHeight()) 
-      },
-      receive: (e, ui) => { 
-        console.log('receive')
-        let self = $('#my-devices')
-        self.innerHeight(self.innerHeight() + ui.item.outerHeight()) 
-        console.log('item: ', ui.item.data())
-        ui.item.data('origin', 'my-devices')
-        console.log('item: ', ui.item.data())
-//        $('#my-devices').innerHeight(
-//          $('#my-devices').innerHeight() + ui.item.outerHeight()) 
-        //$(ui.item).draggable
-
-      },
-      activate: () => {console.log('dev.activate')},
-      connectWith: '.devices',
-    })
   })
 
   function submitSearch() {
@@ -44,20 +13,7 @@
     console.log('query:', query)
     searchAPI(query).then((apiRes) => {
       $('#results-meta').text('(' + apiRes.totalResults + ' results)')
-      let results = apiRes.results.map(device =>
-        $('<li>')
-          .text(device.title)
-          .draggable({
-            scope: 'my-devices',
-            scroll: false,
-            containment: 'window',
-            revert: 'invalid',
-            helper: 'clone',
-            zindex: 99,
-            connectToSortable: '.devices',
-          }) 
-      )
-      //$('#results-meta').text('Showing ' + apiRes.totalResults + ' results')
+      let results = apiRes.results.map(device => $('<div>').text(device.title))
       let numShowing = apiRes.moreResults ? 20 : apiRes.totalResults
       $('#results').html(results)
     })
@@ -70,6 +26,11 @@
         = 'https://www.ifixit.com/api/2.0/search/' 
         + encodeURIComponent(query) 
         + '?filter=category'
+      let urrl = 
+        'https://www.ifixit.com/api/2.0/wikis/CATEGORY?display=hierarchy'
+      let p = jQuery.getJSON(urrl)
+      p.done((data) => { console.log(data) })
+
       jQuery.getJSON(url, resolve)
     })
   }
@@ -91,9 +52,24 @@
     })
   }
 
+  function loadDevices() {
+    console.log('Loading saved devices from local storage')
+  }
+
+  function saveDevices() {
+    console.log('Saving devices o local storage')
+  }
+
+  function addDevice(device) {
+    console.log('Adding', device, 'to saved devices')
+  }
+
+  function removeDevice(device) {
+    console.log('Removing', device, 'from saved devices')
+  }
 
 
-})()
+})(jQuery)
 
 
 
