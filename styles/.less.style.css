@@ -24,15 +24,16 @@
   color: #1F2124;
   margin-bottom: 5px;
 }
-.results {
+.results-wrapper {
+  max-width: 880px;
+}
+.results-wrapper .results {
+  max-width: 880px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
-.results .ownedDevice {
-  background-color: #44DD44;
-}
-.results div {
+.results-wrapper .results .deviceWrap {
   box-sizing: border-box;
   border: solid #000 1px;
   width: 200px;
@@ -44,16 +45,23 @@
   text-align: center;
   font-weight: 900;
 }
-.results div span {
+.results-wrapper .results .deviceWrap span {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
 }
-.results .showMoreButton {
+.results-wrapper .load-more-wrapper {
   display: block;
+  width: 100%;
+}
+.results-wrapper .load-more-wrapper .showMoreButton {
+  display: block;
+  margin: auto;
   width: 90px;
   height: 30px;
-  margin: auto;
+}
+.ownedDevice {
+  background-color: #44DD44 !important;
 }
 #results-meta {
   color: #999;
@@ -61,7 +69,7 @@
 .my-devices-wrapper {
   position: fixed;
   background-color: #ddd;
-  width: 250px;
+  width: 275px;
   bottom: 0px;
   right: 0;
 }
@@ -73,35 +81,50 @@
   font-size: 20px;
   color: white;
 }
-.my-devices-wrapper table {
+.my-devices-wrapper .my-devices-toggle:hover {
+  cursor: pointer;
+}
+.my-devices-wrapper .my-devices-toggle p {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.my-devices-wrapper .my-devices-open {
+  display: none;
+}
+.my-devices-wrapper .my-devices-open table {
   border: black solid 1px;
-  min-height: 80px;
+  min-height: 150px;
   width: 100%;
   border-collapse: collapse;
 }
-.my-devices-wrapper table tr {
+.my-devices-wrapper .my-devices-open table tr {
   box-sizing: border-box;
   display: block;
   min-height: 30px;
   border: black solid 1px;
 }
-.my-devices-wrapper table tr td {
+.my-devices-wrapper .my-devices-open table tr td {
   min-height: 30px;
-  padding-left: 10px;
+  padding-left: 20px;
   line-height: 30px;
 }
-.my-devices-wrapper table tr td span {
+.my-devices-wrapper .my-devices-open table tr td span {
   margin: 2px auto;
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
 }
-.my-devices-wrapper table tr .remove a {
+.my-devices-wrapper .my-devices-open table tr td span a {
+  text-decoration: none;
+  color: #229;
+}
+.my-devices-wrapper .my-devices-open table tr .remove a {
   color: red;
   text-decoration: none;
   font-weight: 900;
 }
-.my-devices-wrapper table tr .remove a:hover {
+.my-devices-wrapper .my-devices-open table tr .remove a:hover {
   cursor: pointer;
 }
 .noselect {

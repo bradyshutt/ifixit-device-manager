@@ -9,7 +9,6 @@
 ;(function(global, jQuery) {
 
   let savedDevices = []
-  let views = []
 
   global.myDevices = {
 
@@ -30,17 +29,7 @@
       } else throw new Error('Local storage unavailable.')
     },
 
-    registerView(view) { 
-      if (!views[view]) views.push(view) 
-    },
 
-    updateViews() {
-      console.log('Updating view')
-      let elements = savedDevices.map((el) => 
-          '<tr><td class="remove"><a>x</a></td>' + 
-          '<td class="name"><span>' + el + '</span></td></tr>').join('')
-      views.forEach((view) => { $(view).html(elements) })
-    },
 
     addDevice(device) {
       device = device.trim()
@@ -48,7 +37,6 @@
       if (!savedDevices[device]) {
         savedDevices.push(device)
         myDevices.saveDevices()
-        myDevices.updateViews()
       }
     },
 
@@ -62,7 +50,6 @@
       if ((idx = savedDevices.indexOf(device)) > -1) {
         savedDevices.splice(idx, 1)
         myDevices.saveDevices()
-        myDevices.updateViews()
       }
       else throw new Error('Attempted to remove ' + device + ' from collection.')
     },
@@ -85,8 +72,12 @@
     clearLocalStorage() {
       console.log('Clearing local storage.')
       localStorage.removeItem('myDevices')
-    }
+    },
+
+    getDevices() { return savedDevices }
   }
+
+  myDevices.loadDevices()
 
 })(window, jQuery)
 

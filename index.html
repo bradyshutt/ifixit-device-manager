@@ -19,18 +19,22 @@
     <!--
     <input type="text" id="search-query" placeholder="iPhone 4S">  
     DEBUGGING INPUT HOLDS INITIAL VALUE -->
-    <input type="text" id="search-query" placeholder="iPhone 4S" value="galaxy note">
+    <input type="text" id="search-query" placeholder="iPhone 4S" value="apple">
     <input type="button" id="search-submit" value="Search">
 
     <div class="results-wrapper">
       <p id="results-meta"></p>
       <div class="results" id="results"></div>
+      <div class="load-more-wrapper"></div>
     </div>
 
 
     <div class="my-devices-wrapper">
       <div class="my-devices-toggle">
-        <p>My Devices</p>
+        <p><span class="my-devices-arrows">&#X25B2;</span>
+           <span class="my-devices-title">My Devices (0)</span> 
+           <span class="my-devices-arrows">&#X25B2;</span>
+        </p>
       </div>
       <div class="my-devices-open">
         <table class="devices" id="my-devices">

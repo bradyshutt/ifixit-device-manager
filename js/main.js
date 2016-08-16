@@ -13,73 +13,133 @@
   $(function pageReady() {
     $('#search-submit').click(submitSearch).click()
     $('#search-query').focus()
+    $('.my-devices-toggle').click((event) => {
+      $('.my-devices-open').slideToggle(400, () => {
+        $('.my-devices-open').is(':visible') 
+          ? $('.my-devices-arrows').text('\u25BC')
+          : $('.my-devices-arrows').text('\u25B2')
+      })
+    })
+    //$('.devicesRow').click(removeFromMyDevices)
 
-    $('#results').click(deviceClicked)
-    $('#my-devices').click(myDevicesClicked)
+    updateViews.register((devices) => {
+      $('#my-devices').html(devices.map((el) => {
+        let row = $(
+          '<tr class="devicesRow"><td class="remove"><a>x</a></td>' +
+          '<td class="name"><span><a href="' + urlify(el) + '">' + 
+          el + '</a></span></td></tr>')
+        row.find('a').click(removeFromMyDevices)
+        return row
+      }))
+    })
 
-    myDevices.loadDevices()
-    myDevices.registerView('#my-devices')
-    myDevices.updateViews()
+    updateViews.register((devices) => {
+      $('.my-devices-title').text('My Devices (' + devices.length + ')')
+    })
+
+    updateViews()
   })
 
-
-  function myDevicesClicked(event) {
-    let target = $(event.target)
-    console.log(target)
-    if (target.text() === 'x') {
-      let device = target.parent().next().text()
-      console.log('clicked remove `x` for ', device)
-      myDevices.removeDevice(device) 
-    }
+  function urlify(el) {
+    return 'http://www.ifixit.com/device/' + el.trim().replace(/\s/, '_')
   }
 
-  /* Catches click event on the container div as it
-   * bubbles up, NOT on the targeted 'device div' */
-  function deviceClicked(event) {
-    let target = $(event.target)
-    let deviceName = target.text()
-    if (target.children().length > 1) return
-    console.log('Clicked button:', deviceName)
+  function removeFromMyDevices(event) {
+    let device = $(event.target).parent().next().text()
+    console.log('clicked remove `x` for ', device)
+    myDevices.removeDevice(device) 
+    let resultNames = $('.deviceWrap').each((idx, el) => {
+      if ($(el).text().trim() === device) {
+        $(el).removeClass('ownedDevice')
+      }
 
-    if (myDevices.contains(deviceName)) {
+    })
+    console.log(resultNames)
+
+    updateViews()
+  }
+
+  function deviceClicked(event) {
+    //if (this !== event.target) return //curTarget.hasClass('deviceWrap')) return true
+    let curTarget = $(event.currentTarget)
+    let deviceName = curTarget.text()
+    console.log('Clicked button:', deviceName)
+    $(this).toggleClass('ownedDevice')
+    //target.css('backgroundColor', '#33AA33')
+
+    if (myDevices.contains(deviceName))
       myDevices.removeDevice(deviceName)
-      target.parent().removeClass('ownedDevice')
-    } else {
+    else
       myDevices.addDevice(deviceName)
-      target.parent().addClass('ownedDevice')
-    }
+    updateViews()
+  }
+
+  updateViews.register = (fn) => updateViews.views.push(fn)
+  updateViews.views = []
+  function updateViews() {
+    console.log('Running update functions')
+    let devices = myDevices.getDevices()
+    updateViews.views.forEach(viewFn => viewFn(devices))
   }
 
   function submitSearch() {
     let query = $('#search-query').val()
     console.log('query:', query)
-    let results = searchAPI(query)
-    results.then((apiRes) => {
+    let resultsItr = searchAPI(query)
+    $('#results').empty()
+    fillResults.shown = 0
+
+    fillResults(resultsItr)
+  }
+
+  fillResults.shown = 0
+  function fillResults(resItr) {
+    resItr.next().value.then((apiRes) => {
+      $('.showMoreButton').remove() 
       let results = apiRes.results.map(device => {
         //let title = device['display_title']
         let title = device['title']
-        /* Some "Device" pages have the term at the end?? 
-         * If so, remove it from these lists */
+        /* Some "Device" wiki pages have the term 'repaire' at the end?? 
+         * If so, remove that word from the name lists */
         if (title.slice(-6).toLowerCase().trim() === 'repair')
-          title = title.slice(0, -6)
-        let el = $('<div>').html($('<span>').text(title))
+          title = title.slice(0, -7)
+        let el = 
+          $('<div class="deviceWrap"><span>' + title + '</span></div>')
+            .click(deviceClicked)
         if (myDevices.contains(title))
           el.addClass('ownedDevice')
         return el
       })
       $('#results-meta').text('(' + apiRes.totalResults + ' results)')
-      $('#results').html(results)
-      if (apiRes.totalResults > 20) {
+      $('#results').append(results)
+      fillResults.shown += 20
+      if ((apiRes.totalResults - fillResults.shown)  > 0) {
         $('<button>')
           .text('Show More')
           .addClass('showMoreButton')
-          .click(loadNextAPIResults)
-          .appendTo('#results')
+          .click(event => fillResults(resItr))
+          .appendTo('.load-more-wrapper')
       }
+      scrollTo(0, document.body.scrollHeight)
     })
   }
 
-  function searchAPI(query) {
+  function *searchAPI(query) {
+    let offset = 0
+    while (true) {
+      yield new Promise((resolve, reject) => { 
+        let url 
+          = 'https://www.ifixit.com/api/2.0/search/' 
+          + encodeURIComponent(query) 
+          + '?filter=category'
+          + '&offset=' + offset
+        resolve(jQuery.getJSON(url))
+      })
+      offset += 20
+    }
+  }
+
+  function searchAPIBackup(query) {
     return new Promise((resolve, reject) => { 
       let url 
         = 'https://www.ifixit.com/api/2.0/search/' 
