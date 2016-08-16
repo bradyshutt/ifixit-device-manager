@@ -38,19 +38,37 @@
   justify-content: flex-start;
   flex-wrap: wrap;
 
+  .ownedDevice {
+    background-color: #44DD44;
+  }
+
   div {
     box-sizing: border-box;
     border: solid #000 1px;
     width: 200px;
     height: 50px;
+    line-height: 50px;
     margin: 10px 10px;
     word-wrap: wrap;
     background-color: #ddd;
     text-align: center;
     font-weight: 900;
-    line-height: 50px;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+    }
+  }
+
+  .showMoreButton {
+    display: block;
+    width: 90px;
+    height: 30px;
+    margin: auto;
   }
 }
+
 
 #results-meta {
   color: #999;
@@ -81,19 +99,31 @@
     tr {
       box-sizing: border-box;
       display: block;
-      height: 30px;
+      min-height: 30px;
       border: black solid 1px;
 
       td {
-        height: 30px;
-        line-height: 30px;
+        min-height: 30px;
         padding-left: 10px;
+        line-height: 30px;
+
+        span {
+          margin: 2px auto;
+          display: inline-block;
+          vertical-align: middle;
+          line-height: normal;
+        }
       }
 
       .remove a {
         color: red;
         text-decoration: none;
         font-weight: 900;
+
+        &:hover {
+          cursor: pointer;
+
+        }
       }
      
     }

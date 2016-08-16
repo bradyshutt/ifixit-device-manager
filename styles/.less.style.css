@@ -29,17 +29,31 @@
   justify-content: flex-start;
   flex-wrap: wrap;
 }
+.results .ownedDevice {
+  background-color: #44DD44;
+}
 .results div {
   box-sizing: border-box;
   border: solid #000 1px;
   width: 200px;
   height: 50px;
+  line-height: 50px;
   margin: 10px 10px;
   word-wrap: wrap;
   background-color: #ddd;
   text-align: center;
   font-weight: 900;
-  line-height: 50px;
+}
+.results div span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+.results .showMoreButton {
+  display: block;
+  width: 90px;
+  height: 30px;
+  margin: auto;
 }
 #results-meta {
   color: #999;
@@ -68,18 +82,27 @@
 .my-devices-wrapper table tr {
   box-sizing: border-box;
   display: block;
-  height: 30px;
+  min-height: 30px;
   border: black solid 1px;
 }
 .my-devices-wrapper table tr td {
-  height: 30px;
-  line-height: 30px;
+  min-height: 30px;
   padding-left: 10px;
+  line-height: 30px;
+}
+.my-devices-wrapper table tr td span {
+  margin: 2px auto;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }
 .my-devices-wrapper table tr .remove a {
   color: red;
   text-decoration: none;
   font-weight: 900;
+}
+.my-devices-wrapper table tr .remove a:hover {
+  cursor: pointer;
 }
 .noselect {
   -webkit-touch-callout: none;
