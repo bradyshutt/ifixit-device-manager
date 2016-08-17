@@ -13,7 +13,7 @@
   global.myDevices = {
 
     loadDevices() {
-      console.log('Loading saved devices from local storage')
+      //console.log('Loading saved devices from local storage')
       if (typeof Storage !== 'undefined') {
         savedDevices = savedDevices || []
         let loaded = JSON.parse(localStorage.getItem('myDevices')) || null
@@ -23,7 +23,7 @@
     }, 
 
     saveDevices() {
-      console.log('Saving devices to local storage')
+      //console.log('Saving devices to local storage')
       if (typeof Storage !== 'undefined') {
         localStorage.setItem('myDevices', JSON.stringify(savedDevices))
       } else throw new Error('Local storage unavailable.')
@@ -33,7 +33,7 @@
 
     addDevice(device) {
       device = device.trim()
-      console.log('Adding', device, 'to saved devices')
+      //console.log('Adding', device, 'to saved devices')
       if (!savedDevices[device]) {
         savedDevices.push(device)
         myDevices.saveDevices()
@@ -42,11 +42,8 @@
 
     removeDevice(device) {
       device = device.trim()
-      console.log(`Removing ${device} from collection`)
+      //console.log(`Removing ${device} from collection`)
       let idx
-      console.log('|' + device + '|')
-      console.log(myDevices.contains(device))
-      console.log(savedDevices)
       if ((idx = savedDevices.indexOf(device)) > -1) {
         savedDevices.splice(idx, 1)
         myDevices.saveDevices()
@@ -70,7 +67,7 @@
     },
 
     clearLocalStorage() {
-      console.log('Clearing local storage.')
+      //console.log('Clearing local storage.')
       localStorage.removeItem('myDevices')
     },
 

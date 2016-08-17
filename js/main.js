@@ -41,13 +41,13 @@
 
   function removeFromMyDevices(event) {
     let device = $(event.target).parent().next().text()
-    console.log('clicked remove `x` for ', device)
+    //console.log('clicked remove `x` for ', device)
     myDevices.removeDevice(device) 
     let resultNames = $('.deviceWrap').each((idx, el) => {
       if ($(el).text().trim() === device)
         $(el).removeClass('ownedDevice')
     })
-    console.log(resultNames)
+    //console.log(resultNames)
     updateViews()
   }
 
@@ -55,7 +55,7 @@
   function deviceClicked(event) {
     let curTarget = $(event.currentTarget)
     let deviceName = curTarget.text()
-    console.log('Clicked button:', deviceName)
+    //console.log('Clicked button:', deviceName)
     $(this).toggleClass('ownedDevice')
     if (myDevices.contains(deviceName))
       myDevices.removeDevice(deviceName)
@@ -74,7 +74,7 @@
   updateViews.register = (fn) => updateViews.views.push(fn)
   updateViews.views = []
   function updateViews() {
-    console.log('Running update functions')
+    //console.log('Running update functions')
     let devices = myDevices.getDevices()
     updateViews.views.forEach(viewFn => viewFn(devices))
   }
@@ -82,7 +82,7 @@
 
   function submitSearch() {
     let query = $('#search-query').val()
-    console.log('query:', query)
+    //console.log('query:', query)
     let resultsItr = searchAPI(query)
     fillResults.shown = 0
     fillResults(resultsItr)
