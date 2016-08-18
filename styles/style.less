@@ -25,18 +25,34 @@
   position: absolute;
   display: block;
   width: 100%; 
+  text-align: center;
+
+  .inputs {
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  .sub {
+    color: @dark;
+    margin-bottom: 5px;
+  }
+
+  #search-query {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  #search-submit {
+    font-size: 28px;
+    display: none;
+  }
+
 }
-
-.sub {
-  color: @dark;
-  margin-bottom: 5px;
-}
-
-
-
 
 .results-wrapper {
     max-width: 880px;
+    margin: auto;
 
   .results {
     max-width: 880px;
@@ -44,14 +60,15 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 
-
     .deviceWrap {
       box-sizing: border-box;
       border: solid #000 1px;
       width: 200px;
+      padding: 0 5px;
       height: 50px;
       line-height: 50px;
       margin: 10px 10px;
+      font-size: 16px;
       word-wrap: wrap;
       background-color: #ddd;
       text-align: center;
@@ -71,7 +88,7 @@
 
     .showMoreButton {
       display: block;
-      margin: auto;
+      margin: 0 auto 50px auto;
       width: 90px;
       height: 30px;
     }
@@ -86,11 +103,13 @@
 
 #results-meta {
   color: #999;
+  text-align: center;
 }
 
 .my-devices-wrapper {
   position: fixed;
   background-color: #ddd;
+  border: 1px solid #000;
   width: 275px;
   bottom: 0px;
   right: 0;
@@ -120,7 +139,7 @@
 
     table {
       border: black solid 1px;
-      min-height: 150px;
+      min-height: 160px;
       width: 100%;
       border-collapse: collapse;
 
@@ -170,8 +189,5 @@
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;           
 }
-
-
-
 
 
